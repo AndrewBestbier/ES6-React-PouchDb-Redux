@@ -2,40 +2,22 @@
 
 import crypto from 'crypto';
 import db from './db';
+import { getSurveyResults } from '../api/api';
 
 
 export function fetchAnswers() {
+
   return db.allDocs({
     include_docs: true
-  }).then(answer => {
+  }).then(rows => {
     return {
       type: 'FETCH_ANSWERS',
-      answer: mapDocsFromPouch(answer)
+      answer: getSurveyResults(rows)
     };
   }).catch(err => {
     throw err;
   });
 };
-
-
-
-
-export function deleteAnswer() {
-  db.allDocs({
-    include_docs: true
-  }).then(records => {
-    return Promise.all(
-      records.rows.map(row => row.doc)
-        .map(doc => db.remove(doc))
-    ).then(() => {
-      return {
-        type: 'DELETE_ANSWERS'
-      };
-    });
-  }).catch(err => {
-    throw err;
-  });
-}
 
 export function insertSurveyAnswer(answer) {
 
@@ -52,13 +34,6 @@ export function insertSurveyAnswer(answer) {
   }).catch(err => {
     throw err;
   });
-}
-
-function mapDocsFromPouch(records) {
-  if (!!!records) {
-    return {};
-  }
-  return records.rows.map(record => record.doc);
 }
 
 function generateId() {
