@@ -3,8 +3,9 @@
 import React from 'react';
 
 import { Pie } from 'react-chartjs';
+import { connect } from 'react-redux';
 
-export default React.createClass({
+let Results =  React.createClass({
 
   render() {
 
@@ -29,6 +30,10 @@ export default React.createClass({
     }
 ]
 
+    let {answers } = this.props;
+
+    console.log(answers);
+
     return (
       <div>
         <h3>Results</h3>
@@ -37,3 +42,11 @@ export default React.createClass({
     );
   }
 });
+
+export default connect(mapStateToProps)(Results);
+
+function mapStateToProps(state) {
+  return {
+    answers: state.answers
+  };
+}

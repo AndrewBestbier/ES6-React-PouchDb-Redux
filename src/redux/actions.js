@@ -1,6 +1,5 @@
 'use strict';
 
-import crypto from 'crypto';
 import db from './db';
 import { getSurveyResults } from '../api/api';
 
@@ -20,8 +19,7 @@ export function fetchAnswers() {
 
 export function insertSurveyAnswer(answer) {
 
-  return db.put({
-    _id: generateId(),
+  return db.post({
     currentlyUsing: answer.currentlyUsing,
     interestedUsing: answer.interestedUsing,
     usingES6: answer.usingES6,
@@ -33,8 +31,4 @@ export function insertSurveyAnswer(answer) {
   }).catch(err => {
     throw err;
   });
-}
-
-function generateId() {
-  return crypto.randomBytes(16).toString('hex');
 }

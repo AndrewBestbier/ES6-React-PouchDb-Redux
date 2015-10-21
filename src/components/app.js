@@ -28,8 +28,6 @@ let App = React.createClass({
   render() {
     let {answers, history, location } = this.props;
 
-    console.log(this.props);
-
     return (
       <div>
         <NavBar history={history} pathname={location.pathname} />
