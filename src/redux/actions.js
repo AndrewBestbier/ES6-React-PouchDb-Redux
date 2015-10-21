@@ -1,7 +1,7 @@
 'use strict';
 
 import db from './db';
-import { getSurveyResults } from '../api/api';
+import { formatSurveyResults } from '../helpers/rawDataToChartJsFormatter';
 
 export function fetchAnswers() {
 
@@ -10,7 +10,7 @@ export function fetchAnswers() {
   }).then(rows => {
     return {
       type: 'FETCH_ANSWERS',
-      answers: getSurveyResults(rows)
+      answers: formatSurveyResults(rows)
     };
   }).catch(err => {
     throw err;

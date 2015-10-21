@@ -8,7 +8,7 @@ var coloursArray = [{
   highlight: "#5AD3D1"
 }];
 
-export function getSurveyResults(rows) {
+export function formatSurveyResults(rows) {
   var docs = rows.rows.map(function (row) {return row.doc;});
   return convertRawDataToChartJsFormat(docs)
 };

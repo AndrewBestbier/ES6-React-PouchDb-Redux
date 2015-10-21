@@ -1,8 +1,8 @@
 'use strict';
 
-import App from './app';
-import Survey from './survey';
-import Results from './results';
+import App from './containers/app';
+import Survey from './containers/survey';
+import Results from './containers/results';
 import React from 'react';
 import {Router, Route } from 'react-router';
 
