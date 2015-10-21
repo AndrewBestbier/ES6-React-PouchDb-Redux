@@ -4,7 +4,6 @@ import crypto from 'crypto';
 import db from './db';
 import { getSurveyResults } from '../api/api';
 
-
 export function fetchAnswers() {
 
   return db.allDocs({
@@ -12,7 +11,7 @@ export function fetchAnswers() {
   }).then(rows => {
     return {
       type: 'FETCH_ANSWERS',
-      answer: getSurveyResults(rows)
+      answers: getSurveyResults(rows)
     };
   }).catch(err => {
     throw err;

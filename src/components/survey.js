@@ -31,6 +31,7 @@ export default React.createClass({
   },
 
   render() {
+
     return (
       <div>
         <h3>Please answer our survey.</h3>

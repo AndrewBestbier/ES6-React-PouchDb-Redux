@@ -1,7 +1,7 @@
 'use strict';
 
 let initialState = {
-  answer: []
+  answers: {}
 };
 
 export default (state=initialState, action) => {
@@ -9,7 +9,7 @@ export default (state=initialState, action) => {
   case 'FETCH_ANSWERS':
     return {
       ...state,
-      answer: action.answer
+      answers: action.answers
     };
   case 'DELETE_ANSWERS':
     return state;
