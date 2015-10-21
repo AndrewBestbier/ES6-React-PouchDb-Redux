@@ -24,6 +24,7 @@ export default React.createClass({
 
   _onChange: function(ref,b,c,d) {
 
+      //Todo clean up te b,c,d
       var currentUserAnswer = this.state.answer;
       currentUserAnswer[ref] = d.payload;
 

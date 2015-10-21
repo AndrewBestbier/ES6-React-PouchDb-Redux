@@ -4,10 +4,9 @@ import store from './store';
 import PouchDB from 'pouchdb';
 import { fetchAnswers } from './actions';
 
-//let db = createDB();
 const db = new PouchDB('app-db');
 
-//used for testing, removes all docs in db;
+//Used for testing, removes all docs in db;
 export function resetDB () {
   return db.allDocs({
     include_docs: true

@@ -6,7 +6,6 @@ import store from '../redux/store';
 import MUI from 'material-ui';
 import NavBar from './nav-bar';
 import React from 'react';
-import ShowAnswers from './show-answers';
 import { connect } from 'react-redux';
 import { fetchAnswers } from '../redux/actions';
 
@@ -33,8 +32,6 @@ const App = React.createClass({
         <NavBar history={history} pathname={location.pathname} />
 
         <Card style={css.appCard}>
-
-          <ShowAnswers answer={answers} />
 
           <div>
             {this.props.children}
