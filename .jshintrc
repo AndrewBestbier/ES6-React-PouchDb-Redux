@@ -1,0 +1,24 @@
+{
+  "node": true,
+  "couch": true,
+  "esnext": true,
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true,
+  "immed": true,
+  "newcap": true,
+  "noarg": true,
+  "undef": true,
+  "unused": "vars",
+  "nonbsp": true,
+  "expr": true,
+  "esnext": true,
+  "globals": {
+    "window": true,
+    "document": true,
+    "eval": true,
+    "describe": true,
+    "it": true,
+    "beforeEach": true,
+  }
+}
