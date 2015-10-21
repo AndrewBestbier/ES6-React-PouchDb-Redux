@@ -15,20 +15,21 @@ export function fetchAnswers() {
   }).catch(err => {
     throw err;
   });
-};
+}
 
 export function insertSurveyAnswer(answer) {
-
   return db.post({
     currentlyUsing: answer.currentlyUsing,
     interestedUsing: answer.interestedUsing,
     usingES6: answer.usingES6,
     yearsExperience: answer.yearsExperience
-  }).then(person => {
+  }).then(resp => {
     return {
       type: 'NEW_SURVEY_ANSWER'
     };
-  }).catch(err => {
-    throw err;
+  })
+  .catch(err => {
+    console.log('err', err);
+
   });
 }

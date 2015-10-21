@@ -19,14 +19,14 @@ const { ThemeManager } = Styles;
 
 injectTapEventPlugin();
 
-let App = React.createClass({
+const App = React.createClass({
 
   componentDidMount() {
     store.dispatch(fetchAnswers());
   },
 
   render() {
-    let {answers, history, location } = this.props;
+    const {answers, history, location } = this.props;
 
     return (
       <div>
