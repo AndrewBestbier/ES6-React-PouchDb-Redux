@@ -29,7 +29,6 @@ export function insertSurveyAnswer(answer) {
     };
   })
   .catch(err => {
-    console.log('err', err);
-
+    throw err;
   });
 }

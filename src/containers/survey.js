@@ -2,15 +2,8 @@
 
 import { insertSurveyAnswer } from '../redux/actions';
 import store from '../redux/store';
-import MUI from 'material-ui';
+import { Panel, Input, ButtonInput } from 'react-bootstrap';
 import React from 'react';
-
-const {
-  RaisedButton,
-  TextField,
-  DropDownMenu
-} = MUI;
-
 
 export default React.createClass({
 
@@ -18,50 +11,50 @@ export default React.createClass({
     return { answer: {}};
   },
 
-  _newPersonHandler() {
-    store.dispatch(insertSurveyAnswer(this.state.answer));
+  _submitAnswer() {
+
+    if(Object.keys(this.state.answer).length === 4){
+      store.dispatch(insertSurveyAnswer(this.state.answer));
+    } else {
+      window.alert("You have not answered all the questions");
+    }
   },
 
-  _onChange: function(ref,b,c,d) {
-
-      //Todo clean up te b,c,d
+  _onChange: function(ref,b) {
       var currentUserAnswer = this.state.answer;
-      currentUserAnswer[ref] = d.payload;
-
+      currentUserAnswer[ref] = b.target.value;
       this.setState({answer: currentUserAnswer});
   },
 
   render() {
 
     return (
-      <div>
-        <h3>Please answer our survey.</h3>
+      <Panel>
         <h3>Which of these frameworks are you currently using the most?</h3>
-        <DropDownMenu menuItems={
-          [{ payload: 'angular', text: 'Angular' },
-          { payload: 'react', text: 'React' }]
-        } onChange={this._onChange.bind(this, 'currentlyUsing')}/>
+        <select className="form-control" onChange={this._onChange.bind(this, 'currentlyUsing')}>
+          <option value="angular">Angular</option>
+          <option value="react">React</option>
+        </select>
 
         <h3>Which of these frameworks are you most interested in using?</h3>
-        <DropDownMenu menuItems={
-          [{ payload: 'angular', text: 'Angular' },
-          { payload: 'react', text: 'React' }]
-        } onChange={this._onChange.bind(this, 'interestedUsing')}/>
+        <select className="form-control" onChange={this._onChange.bind(this, 'interestedUsing')}>
+          <option value="angular">Angular</option>
+          <option value="react">React</option>
+        </select>
 
         <h3>Are you using ES6?</h3>
-        <DropDownMenu menuItems={
-          [{ payload: 'yes', text: 'Yes' },
-          { payload: 'no', text: 'No' }]
-        } onChange={this._onChange.bind(this, 'usingES6')}/>
+        <select className="form-control" onChange={this._onChange.bind(this, 'usingES6')}>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
 
         <h3>How many years of Javascript experience do you have?</h3>
-        <DropDownMenu menuItems={
-          [{ payload: '1', text: '0-1' },
-          { payload: '2', text: '1-2' }]
-        } onChange={this._onChange.bind(this, 'yearsExperience')}/>
-
-        <RaisedButton label="Create" secondary={true} onClick={this._newPersonHandler} />
-      </div>
+        <select className="form-control" onChange={this._onChange.bind(this, 'yearsExperience')}>
+          <option value="1">0-1</option>
+          <option value="2">1-2</option>
+        </select>
+      <ButtonInput type="submit" value="Submit" bsSize="medium" onClick={this._submitAnswer} />
+    </Panel>
     );
   }
 });

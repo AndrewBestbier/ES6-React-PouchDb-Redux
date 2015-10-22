@@ -4,8 +4,14 @@ import React from 'react';
 import _ from 'underscore';
 import { Pie } from 'react-chartjs';
 import { connect } from 'react-redux';
+import store from '../redux/store';
+import { fetchAnswers } from '../redux/actions';
 
 const Results =  React.createClass({
+
+  componentDidMount() {
+    store.dispatch(fetchAnswers());
+  },
 
   render() {
 

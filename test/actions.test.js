@@ -1,4 +1,4 @@
-import {fetchAnswers, insertSurveyAnswer} from '../src/redux/actions';
+import * as actions from '../src/redux/actions';
 import assert from 'assert';
 import {resetDB} from '../src/redux/db';
 import _ from 'underscore';
@@ -11,23 +11,23 @@ describe('actions', () => {
   describe('fetchAnswers', () => {
 
     it('returns empty answers if none are saved', () => {
-      return fetchAnswers().then(resp => {
-        assert.deepEqual(resp.answers.currentlyUsing.length, 0);
-        assert.deepEqual(resp.answers.interestedUsing.length, 0);
-        assert.deepEqual(resp.answers.usingES6.length, 0);
-        assert.deepEqual(resp.answers.yearsExperience.length, 0);
+      return actions.fetchAnswers().then(resp => {
+        assert.equal(resp.answers.currentlyUsing.length, 0);
+        assert.equal(resp.answers.interestedUsing.length, 0);
+        assert.equal(resp.answers.usingES6.length, 0);
+        assert.equal(resp.answers.yearsExperience.length, 0);
       });
     });
 
     it('should include formatted answer', () => {
-      return insertSurveyAnswer({
+      return actions.insertSurveyAnswer({
           currentlyUsing: 'react',
           interestedUsing: 'react',
           usingES6: true,
           yearsExperience: 1
         })
         .then(() => {
-          return fetchAnswers().then(resp => {
+          return actions.fetchAnswers().then(resp => {
             assert.deepEqual({
               "type": "FETCH_ANSWERS",
               "answers": {
@@ -63,42 +63,42 @@ describe('actions', () => {
 
 
     it('should return the correct totals', () => {
-      return insertSurveyAnswer({
+      return actions.insertSurveyAnswer({
           currentlyUsing: 'react',
           interestedUsing: 'angular',
           usingES6: true,
           yearsExperience: 1
         })
         .then(() => {
-          return insertSurveyAnswer({
+          return actions.insertSurveyAnswer({
               currentlyUsing: 'angular',
               interestedUsing: 'react',
               usingES6: false,
               yearsExperience: 2
             })
             .then(() => {
-              return insertSurveyAnswer({
+              return actions.insertSurveyAnswer({
                   currentlyUsing: 'react',
                   interestedUsing: 'react',
                   usingES6: true,
                   yearsExperience: 2
                 })
                 .then(() => {
-                  return insertSurveyAnswer({
+                  return actions.insertSurveyAnswer({
                       currentlyUsing: 'angular',
                       interestedUsing: 'angular',
                       usingES6: false,
                       yearsExperience: 2
                     })
                     .then(() => {
-                      return insertSurveyAnswer({
+                      return actions.insertSurveyAnswer({
                           currentlyUsing: 'angular',
                           interestedUsing: 'angular',
                           usingES6: false,
                           yearsExperience: 1
                         })
                         .then(() => {
-                          return fetchAnswers().then(resp => {
+                          return actions.fetchAnswers().then(resp => {
 
                             //Currently Using
                             assert.equal(_.findWhere(resp.answers.currentlyUsing, {
@@ -139,4 +139,6 @@ describe('actions', () => {
         });
     });
   });
+
+  //End
 });
